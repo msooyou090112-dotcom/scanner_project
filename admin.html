@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>사용자 관리</h1>
+        <a href="/" class="back-link">← 메인으로</a>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>닉네임</th>
+                    <th>상태</th>
+                    <th>가입일</th>
+                    <th>작업</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td>{{ u[0] }}</td>
+                    <td>{{ u[1] }}</td>
+                    <td>{{ u[2] }}</td>
+                    <td>{{ u[3] }}</td>
+                    <td>
+                        {% if u[4] == 1 %}
+                            <span class="badge approved">승인됨</span>
+                        {% else %}
+                            <span class="badge pending">대기중</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ u[5] }}</td>
+                    <td>
+                        {% if u[4] == 0 %}
+                            <form action="/admin/approve/{{ u[0] }}" method="POST" style="display:inline">
+                                <button type="submit" class="approve-btn">승인</button>
+                            </form>
+                            <form action="/admin/reject/{{ u[0] }}" method="POST" style="display:inline"
+                                  onsubmit="return confirm('해당 계정을 정말 삭제할까요? (되돌리기 불가능)')">
+                                <button type="submit" class="reject-btn">거절</button>
+                            </form>
+                        {% else %}
+                            <form action="/admin/unapprove/{{ u[0] }}" method="POST" style="display:inline">
+                                <button type="submit" class="unapprove-btn">승인 취소</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

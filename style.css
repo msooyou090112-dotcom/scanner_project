@@ -1,0 +1,1189 @@
+/*.title {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+}*/
+.highbar {                                     /*메뉴바*/
+    background: rgb(255, 255, 255);
+    justify-content: center;                  /*상하좌우 가운데 정렬*/
+    align-items: center;
+    display: flex;
+    gap: 5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;                
+    height: clamp(2rem, 6vw, 4rem);
+    transition: transform 0.3s;
+}
+
+.highbar.hide {                                /*스크롤 내리면 메뉴바 사라짐*/
+    transform: translateY(-100%);
+}
+
+.highbar a {                                   /*메뉴바 메뉴 글자*/
+    font-size: clamp(0.5rem, 1.5vw, 1rem);
+    color:black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.highbar a:hover {
+    color: rgb(0, 72, 255);                  /*마우스 갖다댔을 때 변화*/
+}
+
+body {
+    overflow-y: scroll;
+    transition: background 1.5s;
+}
+
+section {
+    min-height: 100vh;   
+    padding: 2rem;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#divideroles{
+    background: transparent;
+    background-size: cover;
+}
+
+#activities{
+    background: transparent;
+    background-size: cover;
+    position: relative;
+}
+
+#program{
+    background: transparent;
+    background-size: cover;
+}
+
+/*돌아가는 거*/
+#ability {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.rotate.object {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+.ability {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    
+}
+
+#start {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;   /* 가로 가운데 */
+    align-items: center;       /* 세로 가운데 */
+}
+
+.btn {
+    padding: 20px 50px;          /* 버튼 크기 */
+    font-size: 1.5rem;            /* 글자 크기 */
+    background: #00d4ff;
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: rgb(0, 72, 255);
+    transform: scale(1.05);       /* 살짝 커짐 */
+}
+
+/*기능 소개 애니메이션*/
+#ability {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.rotate.object {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+
+/* 돌아가면서 기능 보여줌 */
+.rotate.object {
+    animation: rotate-object 12s linear infinite;
+}
+
+.ability {
+    animation: counter-rotate 12s linear infinite;
+}
+
+
+@keyframes rotate-object {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes counter-rotate {
+    from {
+        rotate: 0deg;
+    }
+    to {
+        rotate: -360deg;
+    }
+}
+
+.ability1 { top: 0; left: 50%; transform: translateX(-50%); }
+.ability2 { right: 0; top: 50%; transform: translateY(-50%); }
+.ability3 { bottom: 0; left: 50%; transform: translateX(-50%); }
+.ability4 { left: 0; top: 50%; transform: translateY(-50%); }     
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    visibility: hidden;
+}
+
+.station.open .content {
+    max-height: 500px;   /* 펼쳐진 상태 */
+    visibility: visible;
+    color:white
+}
+
+
+
+
+/* 정거장들을 대각선 배치할 부모 컨테이너 */
+.timeline {
+    position: relative;
+    width: 100%;
+    height: 100vh;   /* 한 화면 크기 */
+}
+
+/* 각 정거장 위치 (대각선) */
+.station {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s;
+}
+
+.station.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.station:nth-child(1) { top: 10%; left: 10%; }
+.station:nth-child(2) { top: 17%; left: 35%; }
+.station:nth-child(3) { top: 25%; left: 60%; }
+.station:nth-child(4) { top: 37%; left: 80%; }
+
+.station h3 { color: white; }
+
+
+/* 중앙 큰 전등 */
+.big-light {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.big-light.on {
+    opacity: 1;
+}
+
+
+
+.login-signup {
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    display: flex;
+    gap: 10px;
+}
+
+
+/*login.html css*/
+.login-container {
+    max-width: 500px;                 
+    margin: 5vh auto;                 
+    padding: 3.5rem 3rem;
+    background: white;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+}
+
+.login-field {
+    width: 100%;
+    padding: 1rem 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+    border: 1px solid #dadada;
+    border-radius: 6px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.login-field::placeholder {
+    color: #a0a0a0;
+}
+
+.login-field:focus {
+    border-color: #03c7bd;
+}
+
+
+.login-btn2{
+    width: 100%;
+    padding: 1.1rem;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #03c75a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.login-btn2:hover {
+    background: #02b350;
+}
+
+.link{
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: #888;
+}
+
+.link a {
+    color: #555;
+    text-decoration: none;
+    margin: 0 0.3rem;
+}
+
+.link a:hover {
+    color: #03c75a;
+}
+
+/*signup.html css*/
+
+.signup-container {
+    max-width: 500px;
+    margin: 8vh auto;
+    padding: 3rem 2.5rem;
+    background: white;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* 진행 상황 표시 */
+.progress-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #dadada;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: #03c75a;
+}
+
+/* 각 단계 */
+.step {
+    display: none;
+}
+
+.step.active {
+    display: block;
+}
+
+.step label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* 입력창 + 화살표 한 줄 */
+.input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-input {
+    flex: 1;
+    padding: 1rem 0.9rem;
+    font-size: 1.1rem;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.step-input:focus {
+    border-color: #03c75a;
+}
+
+/* 화살표 버튼 */
+.next-btn, .prev-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 50%;
+    background: #03c75a;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.prev-btn {
+    background: #dadada;
+    color: #333;
+}
+
+.next-btn:hover {
+    background: #02b350;
+}
+
+.prev-btn:hover {
+    background: #b0b0b0;
+}
+
+/* 에러 메시지 */
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+    margin-top: 0.5rem;
+    text-align: left;
+}
+
+/* 마지막 가입하기 버튼 */
+.submit-btn {
+    width: 100%;
+    padding: 1.1rem;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #03c75a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-btn:hover {
+    background: #02b350;
+}
+
+/* 하단 링크 */
+.signup-container .link {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.signup-container .link a {
+    color: #555;
+    text-decoration: none;
+    margin: 0 0.3rem;
+}
+
+.signup-container .link a:hover {
+    color: #03c75a;
+}
+
+/* 비밀번호 입력창 + 눈 아이콘 감싸는 박스 */
+.password-wrap {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrap .step-input {
+    width: 100%;
+    padding-right: 3rem;   /* 눈 아이콘 자리 확보 */
+}
+
+.eye-btn {
+    position: absolute;
+    right: 0.7rem;
+    background: none;
+    border: none;
+    padding: 0.3rem;
+    cursor: pointer;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.eye-btn:hover {
+    color: #03c75a;
+}
+
+/*로그인 안하면 스캐너 못씀 ㅅㄱ*/
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+    padding: 3rem 2.5rem;
+    border-radius: 16px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+.modal-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+.modal-text {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 0.7rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+.modal-btn.cancel {
+    background: #f0f0f0;
+    color: #555;
+}
+
+.modal-btn.cancel:hover {
+    background: #e0e0e0;
+}
+
+.modal-btn.confirm {
+    background: #03c75a;
+    color: white;
+}
+
+.modal-btn.confirm:hover {
+    background: #02b350;
+    transform: translateY(-1px);
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/*회원가입 안내*/
+
+.done-container {
+    max-width: 480px;
+    margin: 10vh auto;
+    padding: 3.5rem 2.5rem;
+    background: white;
+    border: 1px solid #eaeaea;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(64, 224, 208, 0.1);
+}
+
+.done-checkmark {
+    margin-bottom: 1.5rem;
+    animation: popIn 0.5s ease;
+}
+
+/* 체크마크 그려지는 애니메이션 */
+.check-path {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: drawCheck 0.6s ease-out 0.3s forwards;
+}
+
+@keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes drawCheck {
+    to { stroke-dashoffset: 0; }
+}
+
+.done-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.done-text {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.done-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 1.1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #40e0d0;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+.done-btn:hover {
+    background: #2fc4b5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(64, 224, 208, 0.3);
+}
+
+.done-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.done-link a {
+    color: #888;
+    text-decoration: none;
+}
+
+.done-link a:hover {
+    color: #40e0d0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #555;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.back-link:hover {
+    color: #03c75a;
+}
+
+/*admin.html css*/
+.admin-container {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.admin-table th, .admin-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.admin-table th {
+    background: #f5f5f5;
+    font-weight: bold;
+}
+
+.badge {
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.badge.approved {
+    background: #e6f9ed;
+    color: #03c75a;
+}
+
+.badge.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.approve-btn, .reject-btn {
+    padding: 0.4rem 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 0.3rem;
+}
+
+.approve-btn {
+    background: #03c75a;
+    color: white;
+}
+
+.reject-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.unapprove-btn {
+    padding: 0.4rem 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 0.3rem;
+    background: #f39c12;
+    color: white;
+}
+
+
+/* ===== 게시판 ===== */
+.board-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.write-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: #03c75a;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transition: background 0.2s;
+}
+
+.write-btn:hover {
+    background: #02b350;
+}
+
+/* 페들렛 스타일 그리드 */
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.post-card.official {
+    border: 2px solid #03c75a;
+}
+
+.official-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #03c75a;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.post-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.post-body {
+    padding: 1rem;
+}
+
+.post-desc {
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #888;
+    border-top: 1px solid #eee;
+    padding-top: 0.7rem;
+}
+
+.post-author {
+    font-weight: bold;
+    color: #03c75a;
+}
+
+.post-delete {
+    margin-top: 0.7rem;
+    padding: 0.4rem 0.8rem;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #999;
+    padding: 4rem 0;
+    font-size: 1.1rem;
+}
+
+/* 게시물 작성 페이지 */
+.write-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.write-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.write-label {
+    font-weight: bold;
+    color: #333;
+    margin-top: 0.5rem;
+}
+
+.write-file, .write-textarea {
+    padding: 0.8rem;
+    border: 1px solid #dadada;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+}
+
+.write-textarea:focus {
+    border-color: #03c75a;
+}
+
+.write-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #555;
+    padding: 0.5rem;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+
+.write-submit {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #03c75a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.write-submit:hover {
+    background: #02b350;
+}
+
+/* ===== showtime.html ===== */
+.board-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.board-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.post-card.official {
+    border: 2px solid #03c75a;
+}
+
+.official-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #03c75a;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.post-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.post-body {
+    padding: 1rem;
+}
+
+.post-desc {
+    color: #333;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #888;
+    border-top: 1px solid #eee;
+    padding-top: 0.7rem;
+}
+
+.post-author {
+    font-weight: bold;
+    color: #03c75a;
+}
+
+.post-delete {
+    margin-top: 0.7rem;
+    padding: 0.4rem 0.8rem;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #999;
+    padding: 4rem 0;
+    font-size: 1.1rem;
+}
+
+/* ===== 플로팅 작성 버튼 (FAB) ===== */
+.fab-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #03c75a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(3, 199, 90, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: all 0.2s;
+}
+
+.fab-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(3, 199, 90, 0.6);
+}
+
+.fab-icon {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 300;
+}
+
+/* ===== 작성 모달 ===== */
+.write-modal {
+    max-width: 500px;
+    width: 90%;
+    text-align: left;
+    padding: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: #888;
+    cursor: pointer;
+    padding: 0;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.write-form {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.write-label {
+    font-weight: bold;
+    color: #333;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.file-upload-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.file-upload-wrap input[type="file"] {
+    display: none;
+}
+
+.file-upload-label {
+    display: inline-block;
+    padding: 0.7rem 1rem;
+    background: #f0f0f0;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.file-upload-label:hover {
+    background: #e5e5e5;
+    border-color: #03c75a;
+    color: #03c75a;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+.write-textarea {
+    padding: 0.8rem;
+    border: 1px solid #dadada;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+}
+
+.write-textarea:focus {
+    border-color: #03c75a;
+}
+
+.write-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+    padding: 0.6rem;
+    background: #f5f5f5;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.write-submit {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: #03c75a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.write-submit:hover {
+    background: #02b350;
+}
+
+.login-required {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: #666;
+}

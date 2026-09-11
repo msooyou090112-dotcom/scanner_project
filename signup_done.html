@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 완료</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="done-container">
+        <div class="done-checkmark">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="38" stroke="#40e0d0" stroke-width="3"/>
+                <path d="M25 41 L36 52 L56 30" stroke="#40e0d0" stroke-width="5"
+                      stroke-linecap="round" stroke-linejoin="round" fill="none"
+                      class="check-path"/>
+            </svg>
+        </div>
+
+        <h1 class="done-title">회원가입이 완료되었습니다!</h1>
+        <p class="done-text">
+            해킹반 보안 프로그램에 가입해주셔서 감사합니다.<br>
+            로그인 후 서비스를 이용해보세요.
+        </p>
+
+        <a href="/login" class="done-btn">로그인하러 가기</a>
+
+        <p class="done-link">
+            <a href="/">메인으로 돌아가기</a>
+        </p>
+    </div>
+</body>
+</html>

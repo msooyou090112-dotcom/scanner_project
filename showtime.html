@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showtime</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="board-container">
+        <div class="board-header">
+            <h1>스캔 결과 공유</h1>
+            <a href="/" class="back-link">← 메인으로</a>
+        </div>
+
+        <div class="board-grid">
+            {% for p in posts %}
+            <div class="post-card {% if p[4] == 1 %}official{% endif %}">
+                {% if p[4] == 1 %}
+                    <div class="official-badge">개발팀</div>
+                {% endif %}
+                <img src="{{ url_for('static', filename='uploads/' + p[2]) }}" class="post-image">
+                <div class="post-body">
+                    <p class="post-desc">{{ p[3] }}</p>
+                    <div class="post-meta">
+                        <span class="post-author">{{ p[1] }}</span>
+                        <span class="post-date">{{ p[5][:10] }}</span>
+                    </div>
+                    {% if session.get('is_admin') %}
+                    <form action="/showtime/delete/{{ p[0] }}" method="POST"
+                          onsubmit="return confirm('정말 삭제할까요?')">
+                        <button type="submit" class="post-delete">삭제</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if posts|length == 0 %}
+            <p class="empty-msg">아직 게시물이 없습니다. 첫 게시물의 주인공이 되어보세요!</p>
+        {% endif %}
+    </div>
+
+    <!-- 우측 하단 플로팅 작성 버튼 -->
+    <button class="fab-btn" onclick="openWriteModal()">
+        <span class="fab-icon">+</span>
+    </button>
+
+    <!-- 게시물 작성 모달 -->
+    <div id="writeModal" class="modal-overlay" onclick="closeWriteModal(event)">
+        <div class="modal-box write-modal">
+            <div class="modal-header">
+                <h2>게시물 작성</h2>
+                <button class="modal-close" onclick="closeWriteModal()">✕</button>
+            </div>
+
+            {% if session.get('email') %}
+                <form action="/showtime" method="POST" enctype="multipart/form-data" class="write-form">
+                    <label class="write-label">스크린샷</label>
+                    <div class="file-upload-wrap">
+                        <input type="file" name="image" id="imageInput" accept="image/*" required
+                               onchange="previewImage(event)">
+                        <label for="imageInput" class="file-upload-label">이미지 선택</label>
+                        <img id="imagePreview" class="image-preview" style="display:none">
+                    </div>
+
+                    <label class="write-label">설명</label>
+                    <textarea name="description" placeholder="스캔 결과, 발견한 취약점, 소감 등을 자유롭게 작성해주세요."
+                              required class="write-textarea" rows="6"></textarea>
+
+                    {% if session.get('is_admin') %}
+                    <label class="write-checkbox">
+                        <input type="checkbox" name="is_official" value="1">
+                        개발팀 공식 게시물로 등록 (상단 고정)
+                    </label>
+                    {% endif %}
+
+                    <button type="submit" class="write-submit">게시하기</button>
+                </form>
+            {% else %}
+                <p class="login-required">
+                    게시물을 작성하려면 로그인이 필요합니다.
+                </p>
+                <a href="/login" class="write-submit" style="text-align:center; text-decoration:none; display:block;">
+                    로그인하러 가기
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function openWriteModal() {
+            document.getElementById('writeModal').classList.add('active');
+        }
+
+        function closeWriteModal(event) {
+            if (!event || event.target.id === 'writeModal' || event.target.classList.contains('modal-close')) {
+                document.getElementById('writeModal').classList.remove('active');
+            }
+        }
+
+        function previewImage(event) {
+            const preview = document.getElementById('imagePreview');
+            const file = event.target.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeWriteModal();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    
+    <h1 class="title">해킹반 보안 프로그램 Team</h1>                          <!-- 제목-->
+    <nav class = "highbar">                                                <!-- 상단바-->
+        <a href="#activities">활동내용</a>                                  <!-- 상단바 메뉴들-->
+        <a href="#divideroles">역할분담</a>
+        <a href="#ability">기능</a>
+        <a href="/showtime">게시판</a>
+
+    </nav>
+<div class="login-signup">
+    {% if session.get('nickname') %}
+        <span class="user-nick">{{ session['nickname'] }} 님</span>
+        {% if session.get('is_admin') %}
+            <a href="/admin" class="login-btn">관리자페이지</a>
+        {% endif %}
+        <a href="/logout" class="login-btn">로그아웃</a>
+    {% else %}
+        <a href="/login" class="login-btn">로그인</a>
+        <a href="/signup" class="login-btn">회원가입</a>
+    {% endif %}
+</div>
+
+<section id="start">
+    {% if session.get('email') %}
+        <a href="/scanner" class="btn">보안 프로그램 바로가기</a>
+    {% else %}
+        <a href="#" class="btn" onclick="openLoginModal(); return false;">보안 프로그램 바로가기</a>
+    {% endif %}
+</section>
+
+    <section id = "activities">                                           <!--월별 활동내용-->
+        <div class ="timeline">
+<div class="station sawall visible" onclick="toggle(this)">                   <!--4월-->
+    <h3>4월</h3>
+    <div class="content">
+        <p data-text="파이썬 학습 및 프로그래머스 문제 풀이"></p>
+    </div>
+</div>
+
+<div class="station ohwall" onclick="toggle(this)">                           <!--5월-->
+    <h3>5월</h3>
+    <div class="content">
+        <p data-text="보안 프로그램 계획"></p>
+        <p data-text="기능, 디자인 구상 후 검토"></p>
+    </div>
+</div>
+
+<div class="station palwall" onclick="toggle(this)">                          <!--8월-->
+    <h3>8월</h3>
+    <div class="content">
+        <p data-text="보안 프로그램 1차 임시 제작 및 수정"></p>
+    </div>
+</div>
+
+<div class="station guwall" onclick="toggle(this)">                           <!--9월-->
+    <h3>9월</h3>
+    <div class="content">
+        <p data-text="추가예정"></p>
+    </div>
+</div>
+
+
+    <div class="big-light">해킹반 보안 프로그램팀의 활동은 계속됩니다.....</div>   <!--종착점 멘트-->
+</div>
+
+    </section>       
+    <section id = "divideroles"></section>
+    <section id = "program"></section>
+
+    <section id="ability">                                                    <!--돌아가면서 기능 소개 -->
+        <div class="rotate object">
+            <div class="ability ability1">웹 크롤링</div>
+            <div class="ability ability2">SQL Injection<br>탐지</div>
+            <div class="ability ability3">XSS<br>탐지</div>
+            <div class="ability ability4">서버 분석</div>
+        </div>
+    </section>
+
+<!-- 로그인 안하면 스캐너 못씀 ㅅㄱ -->
+<div id="loginModal" class="modal-overlay" onclick="closeLoginModal(event)">
+    <div class="modal-box">
+        <div class="modal-icon">^_^;</div>
+        <h2 class="modal-title">로그인 안하면 스캐너 못씀 ㅅㄱ</h2>
+        <p class="modal-text">보안 프로그램을 이용하려면<br>우측 상단 버튼을 통해 로그인/회원가입 ㄱㄱ</p>
+        <div class="modal-buttons">
+            <button class="modal-btn cancel" onclick="closeLoginModal()">닫기</button>
+            <a href="/login" class="modal-btn confirm">로그인하러 가기</a>
+        </div>
+    </div>
+</div>
+   
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

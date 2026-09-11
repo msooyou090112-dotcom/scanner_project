@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="signup-container">
+
+        <!-- 진행 상황 점 -->
+        <div class="progress-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <form id="signupForm" action="/signup" method="POST">
+
+            <!-- 각 단계 -->
+            <div class="step active" data-step="1">
+                <label>이름을 입력하세요</label>
+                <div class="input-row">
+                    <input type="text" name="name" class="step-input" placeholder="이름">
+                    <button type="button" class="next-btn">→</button>
+                </div>
+                <p class="error-msg"></p>
+            </div>
+
+            <div class="step" data-step="2">
+                <label>이메일을 입력하세요</label>
+                <div class="input-row">
+                    <button type="button" class="prev-btn">←</button>
+                    <input type="email" name="email" class="step-input" placeholder="example@email.com">
+                    <button type="button" class="next-btn">→</button>
+                </div>
+                <p class="error-msg"></p>
+            </div>
+
+            <div class="step" data-step="3">
+                <label>닉네임을 입력하세요</label>
+                <div class="input-row">
+                    <button type="button" class="prev-btn">←</button>
+                    <input type="text" name="nickname" class="step-input" placeholder="닉네임">
+                    <button type="button" class="next-btn">→</button>
+                </div>
+                <p class="error-msg"></p>
+            </div>
+
+<div class="step" data-step="4">
+    <label>비밀번호를 입력하세요</label>
+    <div class="input-row">
+        <button type="button" class="prev-btn">←</button>
+        <div class="password-wrap">
+            <input type="password" name="password" class="step-input" placeholder="8자 이상">
+            <button type="button" class="eye-btn" aria-label="비밀번호 표시">
+                <svg class="eye-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg class="eye-closed" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+            </button>
+        </div>
+        <button type="button" class="next-btn">→</button>
+    </div>
+    <p class="error-msg"></p>
+</div>
+
+<div class="step" data-step="5">
+    <label>비밀번호를 다시 입력하세요</label>
+    <div class="input-row">
+        <button type="button" class="prev-btn">←</button>
+        <div class="password-wrap">
+            <input type="password" name="password_confirm" class="step-input" placeholder="비밀번호 재확인">
+            <button type="button" class="eye-btn" aria-label="비밀번호 표시">
+                <svg class="eye-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg class="eye-closed" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <p class="error-msg"></p>
+    <button type="submit" class="submit-btn">가입하기</button>
+</div>
+
+        </form>
+
+        <p class="link">
+            <a href="/login">로그인</a> ·
+            <a href="/">메인으로</a>
+        </p>
+    </div>
+
+    <script>
+        const steps = document.querySelectorAll('.step');
+        const dots = document.querySelectorAll('.dot');
+        let current = 0;
+
+        function showStep(i) {
+            steps.forEach((s, idx) => s.classList.toggle('active', idx === i));
+            dots.forEach((d, idx) => d.classList.toggle('active', idx <= i));
+        }
+
+        function validate(step) {
+            const input = step.querySelector('.step-input');
+            const err = step.querySelector('.error-msg');
+            const value = input.value.trim();
+
+            if (!value) {
+                err.textContent = '값을 입력해주세요.';
+                return false;
+            }
+
+            // 이메일 형식 체크
+            if (input.type === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+                err.textContent = '올바른 이메일 형식이 아닙니다.';
+                return false;
+            }
+
+            // 비밀번호 길이 체크
+            if (input.name === 'password' && value.length < 8) {
+                err.textContent = '비밀번호는 8자 이상이어야 합니다.';
+                return false;
+            }
+
+            // 비밀번호 재확인 일치 체크
+            if (input.name === 'password_confirm') {
+                const pw = document.querySelector('input[name="password"]').value;
+                if (value !== pw) {
+                    err.textContent = '비밀번호가 일치하지 않습니다.';
+                    return false;
+                }
+            }
+
+            err.textContent = '';
+            return true;
+        }
+
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (validate(steps[current])) {
+                    current++;
+                    showStep(current);
+                }
+            });
+        });
+
+        document.querySelectorAll('.prev-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                current--;
+                showStep(current);
+            });
+        });
+
+        // 마지막 단계 제출 전 검증
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            if (!validate(steps[current])) {
+                e.preventDefault();
+            }
+        });
+
+document.querySelectorAll('.eye-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const input = this.closest('.password-wrap').querySelector('input');
+        const eyeOpen = this.querySelector('.eye-open');
+        const eyeClosed = this.querySelector('.eye-closed');
+        if (input.type === 'password') {
+            input.type = 'text';
+            eyeOpen.style.display = 'none';
+            eyeClosed.style.display = 'inline-block';
+        } else {
+            input.type = 'password';
+            eyeOpen.style.display = 'inline-block';
+            eyeClosed.style.display = 'none';
+        }
+    });
+});
+        
+    </script>
+</body>
+</html>

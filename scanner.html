@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>보안 스캐너</title>
+</head>
+<body>
+    <h1>웹 취약점 스캐너</h1>
+    <p>검사할 사이트 URL을 입력하세요.</p>
+
+    <form action="/scan" method="POST" onsubmit="showLoading()">                      //링크 입력하는 곳
+        <input type="text" name="url" placeholder="http://example.com" required>
+        <button type="submit" id="scanBtn">스캔 시작</button>
+    </form>
+
+    <script>
+    function showLoading() {                                                          //스캔 중 표시
+        document.getElementById('scanBtn').innerText = '스캔 중... (몇 분 소요)';   
+        document.getElementById('scanBtn').disabled = true;
+    }
+    </script>
+
+    <a href="/" class="back-link">← 메인으로 돌아가기</a>
+</body>
+</html>

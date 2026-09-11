@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>스캔 결과</title>
+</head>
+<body>
+    <h1>스캔 결과</h1>
+    <p>총 {{ findings|length }}개 발견</p>
+
+    <table border="1">
+        <tr>
+            <th>위험도</th>
+            <th>내용</th>
+        </tr>
+        {% for level, desc in findings %}
+        <tr>
+            <td>{{ level }}</td>
+            <td>{{ desc }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/scanner">다시 스캔하기</a>
+</body>
+</html>
